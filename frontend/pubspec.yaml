@@ -1,0 +1,37 @@
+name: frontend
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: 1.6.0
+  shared_preferences: ^2.2.2
+  provider: ^6.0.5
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.0.0
+
+  # Pest Detection — TFLite runs via Android method channel (TfliteChannel.kt)
+  # tflite_flutter removed: it bundles libtensorflowlite_jni.so v2.12.0 which
+  # does not support FULLY_CONNECTED op version 12 required by this model.
+  image_picker: ^1.0.7
+  image: ^4.1.7
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pest_model.tflite
+    - assets/pest_class_names.json
