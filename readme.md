@@ -8,3 +8,10 @@ flutter run
 
 go to services.msc if postgres service is stopped start it
 
+Nitrogen (N): 0-200
+Phosphorus (P): 0-200
+Potassium (K): 0-200
+Temperature: -50°C to 60°C
+Humidity: 0-100%
+Soil pH: 0-14
+Rainfall: 0-500mm

@@ -64,10 +64,52 @@ class _CropScreenState extends State<CropScreen> {
         return;
       }
 
-      // ---------------- Negative value validation ----------------
-      if (N < 0 || P < 0 || K < 0 || temperature < 0 || humidity < 0 || rainfall < 0) {
+      // ---------------- Range validation ----------------
+      if (N < 0 || N > 200) {
         setState(() {
-          message = "Values cannot be negative";
+          message = "Nitrogen (N) must be between 0 and 200";
+        });
+        return;
+      }
+
+      if (P < 0 || P > 200) {
+        setState(() {
+          message = "Phosphorus (P) must be between 0 and 200";
+        });
+        return;
+      }
+
+      if (K < 0 || K > 200) {
+        setState(() {
+          message = "Potassium (K) must be between 0 and 200";
+        });
+        return;
+      }
+
+      if (temperature < -50 || temperature > 60) {
+        setState(() {
+          message = "Temperature must be between -50°C and 60°C";
+        });
+        return;
+      }
+
+      if (humidity < 0 || humidity > 100) {
+        setState(() {
+          message = "Humidity must be between 0% and 100%";
+        });
+        return;
+      }
+
+      if (ph < 0 || ph > 14) {
+        setState(() {
+          message = "Soil pH must be between 0 and 14";
+        });
+        return;
+      }
+
+      if (rainfall < 0 || rainfall > 500) {
+        setState(() {
+          message = "Rainfall must be between 0 and 500mm";
         });
         return;
       }
@@ -125,7 +167,7 @@ class _CropScreenState extends State<CropScreen> {
     }
   }
 
-  Widget inputField(String label, TextEditingController controller) {
+  Widget inputField(String label, TextEditingController controller, {String? hint}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
@@ -133,6 +175,7 @@ class _CropScreenState extends State<CropScreen> {
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         decoration: InputDecoration(
           labelText: label,
+          helperText: hint,
           border: const OutlineInputBorder(),
         ),
       ),
@@ -198,13 +241,13 @@ class _CropScreenState extends State<CropScreen> {
         child: Column(
           children: [
 
-            inputField("Nitrogen (N)", nController),
-            inputField("Phosphorus (P)", pController),
-            inputField("Potassium (K)", kController),
-            inputField(t(context, "temperature"), tempController),
-            inputField("Humidity", humidityController),
-            inputField(t(context, "soil_ph"), phController),
-            inputField(t(context, "rainfall"), rainfallController),
+            inputField("Nitrogen (N)", nController, hint: "0-200"),
+            inputField("Phosphorus (P)", pController, hint: "0-200"),
+            inputField("Potassium (K)", kController, hint: "0-200"),
+            inputField(t(context, "temperature"), tempController, hint: "-50 to 60°C"),
+            inputField("Humidity", humidityController, hint: "0-100%"),
+            inputField(t(context, "soil_ph"), phController, hint: "0-14"),
+            inputField(t(context, "rainfall"), rainfallController, hint: "0-500mm"),
 
             const SizedBox(height: 20),
 

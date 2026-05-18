@@ -636,7 +636,7 @@ class _ErrorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Could Not Fetch Prices',
+                  'Could Not Fetch Prices as external agmarknet service is down!!!',
                   style: TextStyle(
                     color: Colors.red.shade800,
                     fontWeight: FontWeight.bold,

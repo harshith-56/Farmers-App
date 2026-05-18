@@ -280,6 +280,23 @@ class ApiService {
         };
       }
 
+      if (response.statusCode == 422) {
+        try {
+          final data = jsonDecode(response.body);
+          if (data["detail"] is List && data["detail"].isNotEmpty) {
+            final errors = (data["detail"] as List).map((e) {
+              final field = e["loc"]?.last ?? "field";
+              final msg = e["msg"] ?? "Invalid value";
+              return "$field: $msg";
+            }).join(", ");
+            return {
+              "success": false,
+              "message": "Validation error: $errors"
+            };
+          }
+        } catch (_) {}
+      }
+
       return {
         "success": false,
         "message": "Server error"
